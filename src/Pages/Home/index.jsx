@@ -1,7 +1,7 @@
 import { withStyles } from "@mui/styles";
 import { Component } from "react";
 import { styleSheet } from "./style";
-import ButtonCommon from "../Component/Common/Button";
+import ButtonCommon from "../../Component/Common/Button";
 import { Link } from "react-router-dom";
 
 class HomePage extends Component {
@@ -19,10 +19,11 @@ class HomePage extends Component {
       <div className={classes.container}>
         <div className={classes.cover}>
           <div className={classes.btn_container}>
-            <Link to="/">
+            <Link to="/customer">
               <ButtonCommon 
                 variant="contained" 
-                label="Save Customer" />
+                label="Save Customer" 
+                />
             </Link>
           </div>
         </div>
