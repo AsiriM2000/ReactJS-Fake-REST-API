@@ -1,13 +1,31 @@
-const { Component } = require("react");
+import { withStyles } from "@mui/styles";
+import { Component } from "react";
+import { styleSheet } from "./style";
+import ButtonCommon from "../Component/Common/Button";
+import { Link } from "react-router-dom";
 
-class HomePage extends Component{
-    render(){
-        return(
-            <div>
-                <h1>Hello React</h1>
-            </div>
-        )
-    }
+class HomePage extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div className={classes.container}>
+        <div className={classes.cover}>
+          <div className={classes.btn_container}>
+            <Link to="/">
+              <ButtonCommon 
+                variant="contained" 
+                label="Save Customer" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
-export default HomePage;
+export default withStyles(styleSheet)(HomePage);
