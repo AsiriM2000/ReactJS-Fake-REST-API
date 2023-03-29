@@ -8,6 +8,9 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
   }
+  componentDidMount() {
+    document.title = "My App"; 
+ }
 
   render() {
     const { classes } = this.props;
