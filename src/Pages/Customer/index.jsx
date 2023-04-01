@@ -5,6 +5,7 @@ import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Typography } from '@mui/material';
 import SnackBarCommon from '../../Component/Common/SnackBar';
 import PostService from "../../Service";
+import BasicPostTable from "../../Component/Common/DataTable";
 
 class Customer extends Component {
     constructor(props) {
@@ -16,11 +17,28 @@ class Customer extends Component {
                 title: '',
                 body: ''
             },
+            data: [],
+            loaded: false,
+            
             alert: false,
             message: '',
             severity: ''
         }
 
+    }
+    async componentDidMount(){
+            let res = await PostService.fetchPosts();
+            if (res.status === 200) {
+                this.setState({
+                    loaded: true,
+                    data: res.data
+                })
+                console.log("res: " + JSON.stringify(res.data))
+    
+            } else {
+                console.log("fetching error: " + res)
+            }
+        
     }
 
     handleSubmit = async() => {
@@ -134,6 +152,13 @@ class Customer extends Component {
                         </Grid>
                     </Grid>
                 </ValidatorForm>
+
+                {this.state.loaded &&
+                    <Grid container spacing={0.5} style={{ height: 400, width: '100%', marginTop: '50px' }}>
+                        <BasicPostTable data={this.state.data} />
+                    </Grid>
+                }
+
                 <SnackBarCommon
                     open={this.state.alert}
                     onClose={() => {
