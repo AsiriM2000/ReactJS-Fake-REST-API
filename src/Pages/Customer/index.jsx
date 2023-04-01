@@ -4,6 +4,7 @@ import ButtonCommon from "../../Component/Common/Button";
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Typography } from '@mui/material';
 import SnackBarCommon from '../../Component/Common/SnackBar';
+import PostService from "../../Service";
 
 class Customer extends Component {
     constructor(props) {
@@ -23,7 +24,21 @@ class Customer extends Component {
     }
 
     handleSubmit = async() => {
-        
+        let formData = this.state.formData
+        let response = await PostService.createPost(formData);
+        if (response.status === 201) {
+            this.setState({
+                alert: true,
+                message: 'Post created succesfully!',
+                severity: 'success'
+            })
+        } else {
+            this.setState({
+                alert: true,
+                message: 'Post created Unsuccesfully!',
+                severity: 'error'
+            })
+        }
     }
 
     render() {
