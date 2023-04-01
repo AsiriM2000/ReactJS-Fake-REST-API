@@ -3,6 +3,7 @@ import Grid from '@mui/material/Grid';
 import ButtonCommon from "../../Component/Common/Button";
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import { Typography } from '@mui/material';
+import SnackBarCommon from '../../Component/Common/SnackBar';
 
 class Customer extends Component {
     constructor(props) {
@@ -13,14 +14,16 @@ class Customer extends Component {
                 id: '',
                 title: '',
                 body: ''
-            }
+            },
+            alert: false,
+            message: '',
+            severity: ''
         }
 
     }
 
-    handleSubmit = () => {
-        console.log('save button clicked!!')
-        console.log(this.state.formData)
+    handleSubmit = async() => {
+        
     }
 
     render() {
@@ -116,6 +119,16 @@ class Customer extends Component {
                         </Grid>
                     </Grid>
                 </ValidatorForm>
+                <SnackBarCommon
+                    open={this.state.alert}
+                    onClose={() => {
+                        this.setState({ open: false })
+                    }}
+                    message={this.state.message}
+                    autoHideDuration={3000}
+                    severity={this.state.severity}
+                    variant="filled"
+                />
             </Fragment>
 
         )
